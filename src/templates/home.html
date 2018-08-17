@@ -2,5 +2,6 @@
 
 {% block content %}
 	<h1>Hello World</h1>
+	{{ request.user.is_authenticated }}
 	<p>This is a template</p>
 {% endblock %}

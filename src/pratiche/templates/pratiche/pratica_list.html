@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Pratiche</title>
+{% endblock %}
+
+{% block content %}
+	<div class="well">
+		<select name="item_id">
+			{% for ag in agenti_list %}
+	    		<option value="{{ ag.id }}">{{ ag.cognome }}</option>
+			{% endfor %}
+		</select>
+	</div>	
+	<div class="container">
+		<h1>{{ title }}</h1>
+		<table class="table table-bordered">
+		  <thead>
+		    <tr>
+				<th scope="col">Protocollo</th>
+		        <th scope="col">Anno</th>
+		        <th scope="col">tipologia</th>
+		        <th scope="col">RGNR</th>
+		        <th scope="col">Magistrato</th>     
+		    </tr>
+		  </thead>
+		  <tbody>
+		    {% for obj in object_list %}
+		    <tr>
+		      <td><a href='{{ obj.get_absolute_url }}'>{{ obj.prot }}</a></td>
+		      <td>{{ obj.timestamp|date:'Y' }}</td>
+		      <td>{{ obj.tipologia }}</td>
+		      <td>{{ obj.rgnr }}</td>
+		      <td>{{ obj.magistrato }}</td>
+		    </tr>
+		    {% endfor %}
+		   </tbody>
+		</table>
+	</div> 
+{% endblock %}
