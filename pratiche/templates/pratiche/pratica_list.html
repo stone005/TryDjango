@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Pratiche</title>
+{% endblock %}
+
+{% block content %}
+<form action='.' method='POST'>
+	{% csrf_token %}
+	<div class="well">
+		<select name="cboAgent" onchange="form.submit()">
+			<option disabled selected>Effettua una selezione</option>
+			<option value="all">Tutti i record</option>
+			<option disabled>------------------</option>	
+			{% for ag in agenti_list %}
+	    		<option value="{{ ag.id }}">{{ ag.cognome }}</option>
+			{% endfor %}
+		</select>
+	</div>	
+	<div class="container">
+		<table class="table table-bordered">
+		  <thead>
+		    <tr>
+				<th scope="col">Protocollo</th>
+		        <th scope="col">Anno</th>
+		        <th scope="col">tipologia</th>
+		        <th scope="col">RGNR</th>
+		        <th scope="col">Magistrato</th>     
+		    </tr>
+		   </thead>
+		  <tbody>
+		    {% for obj in object_list %}
+		    <tr>
+		      <td><a href='{{ obj.get_absolute_url }}'>{{ obj.prot }}</a></td>
+		      <td>{{ obj.timestamp|date:'Y' }}</td>
+		      <td>{{ obj.tipologia }}</td>
+		      <td>{{ obj.rgnr }}</td>
+		      <td>{{ obj.magistrato }}</td>
+		    </tr>
+		    {% endfor %}
+		   </tbody>
+		</table>
+	</div>
+</form> 
+{% endblock %}
